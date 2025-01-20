@@ -3,6 +3,11 @@ package br.com.miaulabs.tcgscanner.controller.auth;
 import br.com.miaulabs.tcgscanner.dto.auth.LoginDTO;
 import br.com.miaulabs.tcgscanner.dto.auth.TokenResponseDTO;
 import br.com.miaulabs.tcgscanner.service.auth.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +29,11 @@ public class AuthController {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
 
+    @Operation(
+            summary = "Autenticação do usuário",
+            description = "Autentica o usuário usando email e senha codificados em Base64 no cabeçalho Authorization. " +
+                    "Exemplo de como gerar o Base64: `echo -n \"email:senha\" | base64` no terminal."
+    )
     @PostMapping("/login")
     public TokenResponseDTO login(@RequestHeader HttpHeaders headers, HttpServletRequest request) {
         String authHeader = headers.getFirst(HttpHeaders.AUTHORIZATION);

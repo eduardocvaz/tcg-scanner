@@ -7,4 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CardService extends BaseService<Card, CardRepository> {
+    // Qualquer operação específica do Card pode ser adicionada aqui
+    public Card findByName(String name) {
+        return repository.findByName(name);
+    }
 }

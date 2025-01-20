@@ -3,6 +3,7 @@ package br.com.miaulabs.tcgscanner.model.auth;
 import br.com.miaulabs.tcgscanner.model.base.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class Credential extends BaseModel implements UserDetails {
 
     @OneToOne

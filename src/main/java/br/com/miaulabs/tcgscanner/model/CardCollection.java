@@ -3,12 +3,13 @@ package br.com.miaulabs.tcgscanner.model;
 import br.com.miaulabs.tcgscanner.model.base.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "card_collection")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardCollection extends BaseModel {

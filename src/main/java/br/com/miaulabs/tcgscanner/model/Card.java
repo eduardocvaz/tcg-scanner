@@ -3,6 +3,7 @@ package br.com.miaulabs.tcgscanner.model;
 import br.com.miaulabs.tcgscanner.model.base.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 @Table(name = "card")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Card extends BaseModel {

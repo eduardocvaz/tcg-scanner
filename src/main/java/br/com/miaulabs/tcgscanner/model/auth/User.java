@@ -6,12 +6,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "user_account")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends BaseModel {
@@ -29,4 +30,10 @@ public class User extends BaseModel {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection collection;  // Relacionamento de 1 para 1 com Collection
+
+    // Explicitamente adicionar o getter para `id`
+    @Override
+    public Long getId() {
+        return super.getId();
+    }
 }

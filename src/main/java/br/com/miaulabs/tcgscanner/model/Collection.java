@@ -4,6 +4,7 @@ import br.com.miaulabs.tcgscanner.model.auth.User;
 import br.com.miaulabs.tcgscanner.model.base.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
@@ -11,15 +12,15 @@ import java.util.Set;
 @Table(name = "collection")
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Collection extends BaseModel {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;  // Relacionamento com User
 
-    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<CardCollection> cardCollections;  // Relacionamento com Card_Collection
 }

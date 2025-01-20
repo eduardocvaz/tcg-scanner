@@ -8,5 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CollectionService extends BaseService<Collection, CollectionRepository> {
-
+    // Qualquer operação específica da Collection pode ser adicionada aqui
+    public Collection findByUser(User user) {
+        return repository.findByUser(user);
+    }
 }
