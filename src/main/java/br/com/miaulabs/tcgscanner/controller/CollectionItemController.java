@@ -7,6 +7,7 @@ import br.com.miaulabs.tcgscanner.model.Card;
 import br.com.miaulabs.tcgscanner.model.CollectionItem;
 import br.com.miaulabs.tcgscanner.repository.CardRepository;
 import br.com.miaulabs.tcgscanner.service.CardCollectionService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class CollectionItemController {
 
 
     @GetMapping
+    @Transactional
     public List<CollectionItemDTO> getAllCardCollections() {
         return cardCollectionService.findAll().stream()
                 .map(collectionItemMapper::cardCollectionToCardCollectionDTO)
@@ -35,6 +37,7 @@ public class CollectionItemController {
     }
 
     @GetMapping("/{id}")
+    @Transactional
     public CollectionItemDTO getCardCollectionById(@PathVariable Long id) {
         CollectionItem collectionItem = cardCollectionService.findById(id);
         return collectionItemMapper.cardCollectionToCardCollectionDTO(collectionItem);
