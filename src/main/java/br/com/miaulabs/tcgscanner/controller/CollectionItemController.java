@@ -1,10 +1,11 @@
 package br.com.miaulabs.tcgscanner.controller;
 
 import br.com.miaulabs.tcgscanner.dto.CollectionItemDTO;
+import br.com.miaulabs.tcgscanner.dto.CollectionItemRequestDTO;
 import br.com.miaulabs.tcgscanner.mapper.CollectionItemMapper;
 import br.com.miaulabs.tcgscanner.model.Card;
 import br.com.miaulabs.tcgscanner.model.CollectionItem;
-import br.com.miaulabs.tcgscanner.model.Collection;
+import br.com.miaulabs.tcgscanner.repository.CardRepository;
 import br.com.miaulabs.tcgscanner.service.CardCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,8 @@ public class CollectionItemController {
     @Autowired
     private CollectionItemMapper collectionItemMapper;  // Injeção do Mapper para CardCollection
 
+
+
     @GetMapping
     public List<CollectionItemDTO> getAllCardCollections() {
         return cardCollectionService.findAll().stream()
@@ -39,10 +42,8 @@ public class CollectionItemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CollectionItemDTO createCardCollection(@RequestBody CollectionItemDTO collectionItemDTO) {
-        CollectionItem collectionItem = collectionItemMapper.cardCollectionDTOToCardCollection(collectionItemDTO);
-        collectionItem = cardCollectionService.insert(collectionItem);
-        return collectionItemMapper.cardCollectionToCardCollectionDTO(collectionItem);
+    public CollectionItemDTO createCardCollection(@RequestBody CollectionItemRequestDTO collectionItemDTO) {
+        return collectionItemMapper.cardCollectionToCardCollectionDTO(cardCollectionService.save(collectionItemDTO));
     }
 
     @PutMapping("/{id}")

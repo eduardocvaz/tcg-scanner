@@ -15,6 +15,10 @@ import lombok.experimental.SuperBuilder;
 public class CollectionItem extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "collection_id")
+    private Collection collection;  // Relacionamento com Collection
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
     private Card card;
 

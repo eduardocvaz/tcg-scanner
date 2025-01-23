@@ -4,11 +4,11 @@ import br.com.miaulabs.tcgscanner.dto.CardDTO;
 import br.com.miaulabs.tcgscanner.mapper.CardMapper;
 import br.com.miaulabs.tcgscanner.model.Card;
 import br.com.miaulabs.tcgscanner.model.Price;
-import br.com.miaulabs.tcgscanner.service.CardIdentificationService;
 import br.com.miaulabs.tcgscanner.service.CardScrapingService;
 import br.com.miaulabs.tcgscanner.service.CardService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.client.MultipartBodyBuilder;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,11 +30,6 @@ public class CardController {
 
     @Autowired
     private CardMapper cardMapper;  // Injeção do Mapper para Card
-
-    // Método que recebe uma imagem, identifica a carta e verifica se o imageName existe no banco
-    @Autowired
-    private CardIdentificationService cardIdentificationService;
-
 
     @Autowired
     private RestTemplate restTemplate;
@@ -134,6 +128,7 @@ public class CardController {
     }
 
     @GetMapping
+    @Transactional
     public List<CardDTO> getAllCards() {
         return cardService.findAll().stream()
                 .map(cardMapper::cardToCardDTO)
@@ -141,6 +136,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}")
+    @Transactional
     public CardDTO getCardById(@PathVariable Long id) {
         Card card = cardService.findById(id);
         return cardMapper.cardToCardDTO(card);

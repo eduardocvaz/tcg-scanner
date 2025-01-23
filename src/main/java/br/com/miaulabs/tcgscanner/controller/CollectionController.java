@@ -28,6 +28,7 @@ public class CollectionController {
     private UserMapper userMapper;  // Injeção do Mapper para User
 
     @GetMapping
+    @Transactional
     public List<CollectionDTO> getAllCollections() {
         return collectionService.findAll().stream()
                 .map(collectionMapper::collectionToCollectionDTO)
@@ -35,6 +36,7 @@ public class CollectionController {
     }
 
     @GetMapping("/{id}")
+    @Transactional
     public CollectionDTO getCollectionById(@PathVariable Long id) {
         Collection collection = collectionService.findById(id);
         return collectionMapper.collectionToCollectionDTO(collection);
