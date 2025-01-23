@@ -1,0 +1,16 @@
+requests~=2.31.0
+beautifulsoup4~=4.12.3
+python-telegram-bot
+psycopg2-binary
+flask~=3.0.2
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-JWT-Extended
+flask-cors
+
+cloudscraper~=1.2.71
+asyncpg~=0.30.0
+Werkzeug~=3.0.1
+selenium~=4.28.0
+opencv-python~=4.11.0.86
+numpy~=2.2.2

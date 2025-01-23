@@ -12,15 +12,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CardCollection extends BaseModel {
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "collection_id")
-    private Collection collection;  // Relacionamento com Collection
+public class CollectionItem extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
-    private Card card;  // Relacionamento com Card
+    private Card card;
 
     @Column
     private Integer quantity;  // Quantidade de cartas na coleção

@@ -10,5 +10,5 @@ import java.util.Set;
 public class CollectionDTO {
     private Long id;
     private Long userId; // Em vez de expor a entidade User, referenciamos o id do usuário
-    private Set<CardDTO> cards; // Lista dos ids de Card associados à coleção
+    private Set<CollectionItemDTO> collectionItems; // Lista dos ids de Card associados à coleção
 }

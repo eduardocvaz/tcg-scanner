@@ -3,6 +3,8 @@ package br.com.miaulabs.tcgscanner.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class CardDTO {
@@ -13,4 +15,7 @@ public class CardDTO {
     private String color;
     private String manaCost;
     private String urlImage;
+    private String imageName;
+
+    private List<PriceDTO> prices; // Lista de preços associados à carta
 }

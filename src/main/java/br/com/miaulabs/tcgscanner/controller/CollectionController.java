@@ -6,6 +6,7 @@ import br.com.miaulabs.tcgscanner.mapper.UserMapper;
 import br.com.miaulabs.tcgscanner.model.Collection;
 import br.com.miaulabs.tcgscanner.model.auth.User;
 import br.com.miaulabs.tcgscanner.service.CollectionService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,7 @@ public class CollectionController {
     }
 
     @GetMapping("/user/{userId}")
+    @Transactional
     public CollectionDTO getCollectionByUser(@PathVariable Long userId) {
         User user = new User();
         user.setId(userId);

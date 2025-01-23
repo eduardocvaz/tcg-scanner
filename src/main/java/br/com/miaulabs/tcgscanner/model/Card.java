@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,6 +32,10 @@ public class Card extends BaseModel {
     @Column
     private String urlImage;
 
-    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CardCollection> cardCollections;  // Relacionamento com Card_Collection
+    @Column(unique = true) // Garante que imageName seja único
+    private String imageName;
+
+    @ElementCollection
+    @CollectionTable(name = "price", joinColumns = @JoinColumn(name = "card_id"))
+    private List<Price> prices; // Lista de preços associados à carta
 }

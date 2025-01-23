@@ -17,10 +17,11 @@ import java.util.Set;
 @NoArgsConstructor
 public class Collection extends BaseModel {
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;  // Relacionamento com User
+    private User user;
 
-    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<CardCollection> cardCollections;  // Relacionamento com Card_Collection
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "collection_id")
+    private Set<CollectionItem> collectionItems;
 }

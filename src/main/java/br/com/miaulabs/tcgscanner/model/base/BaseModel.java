@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
 @MappedSuperclass
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)

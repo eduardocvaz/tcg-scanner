@@ -1,5 +1,6 @@
 package br.com.miaulabs.tcgscanner.service.auth;
 
+import br.com.miaulabs.tcgscanner.model.auth.Credential;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -22,6 +23,9 @@ public class TokenService {
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
 
+        // Extrair os detalhes do usuário autenticado
+        Credential credential = (Credential) authentication.getPrincipal();
+
         String scope = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
@@ -32,6 +36,7 @@ public class TokenService {
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .subject(authentication.getName())
+                .claim("userId", credential.getUser().getId()) // Adicionar o ID do usuário
                 .claim("scope", scope)
                 .build();
         return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

@@ -1,7 +1,9 @@
 package br.com.miaulabs.tcgscanner.controller.auth;
 
+import br.com.miaulabs.tcgscanner.config.SecurityUtils;
 import br.com.miaulabs.tcgscanner.dto.auth.LoginDTO;
 import br.com.miaulabs.tcgscanner.dto.auth.TokenResponseDTO;
+import br.com.miaulabs.tcgscanner.model.auth.Credential;
 import br.com.miaulabs.tcgscanner.service.auth.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,9 +48,14 @@ public class AuthController {
                 );
         String token = tokenService.generateToken(authentication);
 
+        // Extrair os detalhes do usuário autenticado
+        Credential credential = (Credential) authentication.getPrincipal();
+
+
         return TokenResponseDTO
                 .builder()
                 .username(loginDto.username())
+                .userId(credential.getUser().getId())
                 .token(token)
                 .build();
     }

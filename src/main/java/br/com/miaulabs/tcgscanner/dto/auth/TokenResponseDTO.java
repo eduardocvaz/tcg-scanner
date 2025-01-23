@@ -10,4 +10,6 @@ import lombok.*;
 public class TokenResponseDTO {
     private String token;
     private String username;
+    private Long userId;
+
 }

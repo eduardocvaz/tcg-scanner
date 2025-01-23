@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CardCollectionDTO {
+public class CollectionItemDTO {
 
     private Long id;
-    private Long cardId;
-    private Long collectionId;
+    private CardDTO card;
     private Integer quantity;
 }

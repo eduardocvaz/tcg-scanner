@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface CardRepository extends BaseRepository<Card> {
 
     Card findByName(String name);
+
+    Card findByImageName(String imageName); // Método para buscar pelo imageName
 }

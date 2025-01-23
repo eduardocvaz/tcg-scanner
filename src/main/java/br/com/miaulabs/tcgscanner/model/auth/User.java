@@ -28,9 +28,6 @@ public class User extends BaseModel {
     @Email
     private String email;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection collection;  // Relacionamento de 1 para 1 com Collection
-
     // Explicitamente adicionar o getter para `id`
     @Override
     public Long getId() {
